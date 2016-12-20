@@ -17,18 +17,18 @@ public interface ASICamera extends Library
     void closeCamera();
     boolean isColorCam();
     double getPixelSize();
-    BayerPattern getColorBayer();
+    int getColorBayer();
     String getCameraModel(int camIndex);
 
     boolean enableDarkSubtract(String bmpPath);
     void disableDarkSubtract();
 
-    boolean isAvailable(ControlType control);
-    boolean isAutoSupported(ControlType control);
-    int getValue(ControlType control, IntByReference pbAuto);
-    int getMin(ControlType control);
-    int getMax(ControlType control);
-    void setValue(ControlType control, int value, boolean autoSet);
+    boolean isAvailable(int control);
+    boolean isAutoSupported(int control);
+    int getValue(int control, IntByReference pbAuto);
+    int getMin(int control);
+    int getMax(int control);
+    void setValue(int control, int value, boolean autoSet);
     void setAutoPara(int iMaxGain, int iMaxExp, int iDestBrightness);
     void getAutoPara(IntByReference pMaxGain, IntByReference pMaxExp, IntByReference pDestBrightness);
 
@@ -49,18 +49,18 @@ public interface ASICamera extends Library
     int getBin();
 
     boolean setStartPos(int startX, int startY);
-    boolean setImageFormat(int width, int height, int binning, ImgType imgType);
+    boolean setImageFormat(int width, int height, int binning, int imgType);
     ImgType getImgType();
 
     void startCapture();
     void stopCapture();
 
-    boolean getImageData(Pointer buffer, int bufSize, int waitMs);
-    void pulseGuide(GuideDirections direction, int timeMs);
+    boolean getImageData(byte[] buffer, int bufSize, int waitMs);
+    void pulseGuide(int direction, int timeMs);
 
     void startExposure();
-    ExposureStatus getExpStatus();
-    boolean getImageAfterExp(Pointer buffer, int bufSize);
+    int getExpStatus();
+    boolean getImageAfterExp(byte[] buffer, int bufSize);
     void stopExposure();
 
     boolean isUSB3Host();
